@@ -28,7 +28,13 @@ const ColorList = ({ colors, handleFlag }) => {
   };
 
   const deleteColor = color => {
-    // make a delete request to delete this color
+    axiosWithAuth().delete(`/api/colors/${color.id}`)
+      .then(() => {
+        handleFlag();
+        setEditing(false);
+      })
+      .catch(err => console.log('Error: ColorList: DELETE: ', err))
+
   };
 
   return (
